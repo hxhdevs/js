@@ -1,0 +1,200 @@
+
+<!-- Modal de surtimientos =====================================-->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#surtidomodal" id="btnNuevoSurtimiento">
+    <i class="fas fa-plus-circle"></i> Nuevo surtimiento
+</button> -->
+
+<div class="modal fade" id="surtidomodal" tabindex="-1" role="dialog" aria-labelledby="surtidomodalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document"> <!-- Agrega la clase modal-lg aquí -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="surtidomodalLabel">Nuevo surtimiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="idsurtimiento" class="col-form-label">#</label>
+              <input type="text" class="form-control" id="idsurtimiento" placeholder="" readonly>
+              <input type="hidden" id="idsurtimiento" name="idsurtimiento">
+            </div> 
+            <div class="form-group col-md-5">
+              <label for="lecheria" class="col-form-label">Lecheria:</label>
+              <input type="text" class="form-control" id="lecheria" placeholder="Busque lecheria a ingresar">
+              <input type="hidden" id="fk_lecheria_seleccionada" name="fk_lecheria_seleccionada">
+            </div>
+            <div class="form-group col-md-5">
+              <label for="producto" class="col-form-label">Producto:</label>
+              <input type="text" class="form-control" id="producto" placeholder="Busque el producto a ingresar">
+              <input type="hidden" id="fk_producto_seleccionado" name="fk_producto_seleccionado">
+            </div>
+            <div class="form-group col-md-5">
+              <label for="cantidad" class="col-form-label">Cantidad:</label>
+              <input type="text" class="form-control" id="cantidad" placeholder="Ingrese cantidad">
+              <input type="hidden" id="cantidad" name="cantidad">
+            </div>
+            
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAgregar"><i class="fas fa-file-medical"></i> Agregar</button>  
+        <hr>
+        <div class="table-responsive">
+        <table class="table" id="tablaSurtidos">
+            <thead>
+                <tr>
+                    <th>ID surtido</th>
+                    <th>Lecheria</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        </form>
+      </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+// ========================================================================================================================================================
+$.ajax({
+        url: '../../pruebadiana/loaddata_lecherias.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('#lecheria').autocomplete({
+        source: data.data.map(item => ({ label: item[1], value: item[1] })),
+        appendTo: "#surtidomodal",
+        select: function (event, ui) {
+                    var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
+                    response($.grep(data.data, function (value) {
+                        return matcher.test(value[1]);
+                    }));
+                },
+                select: function (event, ui) {
+                    console.log("Seleccionado: " + ui.item.value);
+                }
+            });
+        },
+        error: function (error) {
+            console.error('Error al obtener datos: ' + JSON.stringify(error));
+        }
+    });
+// ========================================================================================================================================================
+$.ajax({
+        url: '../../pruebadiana/loaddata_productos.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('#producto').autocomplete({
+        source: data.data.map(item => ({ label: item[1], value: item[1] })),
+        appendTo: "#surtidomodal",
+        select: function (event, ui) {
+                    var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
+                    response($.grep(data.data, function (value) {
+                        return matcher.test(value[1]);
+                    }));
+                },
+                select: function (event, ui) {
+                    console.log("Seleccionado: " + ui.item.value);
+                }
+            });
+        },
+        error: function (error) {
+            console.error('Error al obtener datos: ' + JSON.stringify(error));
+        }
+    });
+// ========================================================================================================================================================
+$(document).ready(function() {
+    var primeraLecheria = ''; // Variable para almacenar la primera lechería capturada
+    $('#btnAgregar').click(function() {
+        var idsurtimiento = $('#idsurtimiento').val();
+        var lecheria = $('#lecheria').val();
+        var producto = $('#producto').val();
+        var cantidad = $('#cantidad').val();
+        if (producto.trim() !== '') {
+            if (primeraLecheria === '') {
+                primeraLecheria = lecheria;
+            }
+            var newRow = '<tr><td>' + idsurtimiento + '</td><td>' + primeraLecheria + '</td><td>' + producto + '</td><td>' + cantidad + '</td></tr>';
+            $('#tablaSurtidos tbody').append(newRow);
+            $('#producto, #cantidad').val('');
+            if (lecheria !== primeraLecheria) {
+                $('#lecheria').val('');
+            } else {
+                $('#lecheria').prop('readonly', true);
+            }
+        }
+    });
+
+    $('#btnNuevoSurtimiento').click(function() {
+        // Limpiar tabla
+        $('#tablaSurtidos tbody').empty();
+        // Limpiar campos
+        $('#lecheria').val('');
+        // Reiniciar variables
+        primeraLecheria = '';
+        // Habilitar campo de lechería
+        $('#lecheria').prop('readonly', false);
+    });
+});
+// ========================================================================================================================================================
+    $(document).ready(function() {
+    $('#btnNuevoSurtimiento').click(function() {
+        $.ajax({
+            url: '../../Controllers/DatatablesCalls/crear_surtimiento.php',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                $('#idsurtimiento').val(response.numero_registro);
+                console.log('Número de registro creado:', response.numero_registro);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al crear el surtimiento:', error);
+            }
+        });
+    });
+});
+// ========================================================================================================================================================
+$(document).ready(function() {
+    $('#btnGuardar').click(function() {
+        var datos = []; // Matriz para almacenar los datos de la tabla
+        // Recorre cada fila de la tabla
+        $('#tablaSurtidos tbody tr').each(function() {
+            var fila = {}; // Objeto para almacenar los datos de cada fila
+            // Obtén los datos de cada celda de la fila actual
+            fila.idsurtimiento = $(this).find('td:eq(0)').text();
+            fila.lecheria = $(this).find('td:eq(1)').text();
+            fila.producto = $(this).find('td:eq(2)').text();
+            fila.cantidad = $(this).find('td:eq(3)').text();
+            // Agrega el objeto de fila a la matriz de datos
+            datos.push(fila);
+        });
+        // Envía los datos al servidor mediante AJAX
+        $.ajax({
+            url: '../../Controllers/Peticiones/Surtimientosave.php',
+            method: 'POST',
+            data: { datos: JSON.stringify(datos) }, // Convierte la matriz a una cadena JSON
+            success: function(response) {
+                // Maneja la respuesta del servidor
+                console.log(response);
+                // Aquí puedes agregar cualquier otra lógica después de guardar los datos
+            },
+            error: function(xhr, status, error) {
+                // Maneja el error
+                console.error(error);
+            }
+        });
+    });
+});
+// ========================================================================================================================================================
