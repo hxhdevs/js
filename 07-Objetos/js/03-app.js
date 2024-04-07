@@ -10,4 +10,5 @@ producto.imagen = "pic.jpg";
 
 //Eliminar propiedad de un objeto, colocar propiedad despues de delete.
 delete producto.disponible;
+
 console.log(producto)
