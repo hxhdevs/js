@@ -1,11 +1,11 @@
 // Otro iterador muy común es el while loop, este se ejecuta mientras una condición sea verdadera..
 // consta principalmente de 3 pártes 1|- condicion 2- bloque de codigo 3- incremento
 let i = 0;
-// while (i < 10) { // condicion
-//     // Bloque de código...
-//     console.log(`Numero: ${i}`);
-//     i++; // incremento
-// }
+while (i < 10) { // condicion
+    // Bloque de código...
+    console.log(`Numero: ${i}`);
+    i++; // incremento
+}
 
 // El while se ejecuta mientras una condición sea verdadera, por lo tanto si inicicializamos en un valor mayor al que procesara en la condicion, no hará nada..
 
