@@ -81,4 +81,4 @@ console.log(card.nextElementSibling);
 // También hay una forma de ir digamos en la otra dirección...
 const ultimoCard = document.querySelector('.card:nth-child(4)');
 console.log(ultimoCard)
-console.log(ultimoCard.previousElementSibling);
+console.log(ultimoCard.previousElementSibling); 
