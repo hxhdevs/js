@@ -14,21 +14,22 @@ document.addEventListener('DOMContentLoaded', function() {
     //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
     function validar(e) {
         if(e.target.value.trim() === ''){
-            // console.log('Campo vacio')
-            mostrarAlerta(`El campo ${e.target.id} es obligatorio`);//cambiamos por template strings con target
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);//cambiamos por template strings con target
+            //pasamos dos parametros ahora es mensaje y referencia con target para ver que elemento mostraremos
         }else{
             console.log('Si hay algo')
         }
     }
 
-    function mostrarAlerta(mensaje){
+    function mostrarAlerta(mensaje, referencia){//Ahora recibimos dos parametros
         //Generar alerta con HTML
         const error = document.createElement('P');
         error.textContent = mensaje
         error.classList.add('bg-red-600', 'text-white','p-2','text-center');
         // console.log(error);
         //Inyectar error al formulario
-        formulario.appendChild(error);
+        referencia.appendChild(error);//apuntamos con target a donde queremos mostrar la alerta
+
     }
 
 });
