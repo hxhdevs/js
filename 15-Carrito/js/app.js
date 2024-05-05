@@ -22,12 +22,10 @@ function agregarCurso(e) {
           // Enviamos el curso seleccionado para tomar sus datos
           leerDatosCurso(curso);
      }
-     console.log('Curso seleccionado')
 }
 
 // Lee los datos del curso
 function leerDatosCurso(curso) {
-
      const infoCurso = {
           imagen: curso.querySelector('img').src,
           titulo: curso.querySelector('h4').textContent,
@@ -35,7 +33,6 @@ function leerDatosCurso(curso) {
           id: curso.querySelector('a').getAttribute('data-id'), 
           cantidad: 1
      }
-
           articulosCarrito = [...articulosCarrito, infoCurso];
      
      console.log(articulosCarrito)
@@ -55,30 +52,32 @@ function eliminarCurso(e) {
           carritoHTML();
      }
 }
-
-
 // Muestra el curso seleccionado en el Carrito
 function carritoHTML() {
-     //limpia el HTML
-     limnpiaHTML()
+     limpiarHTML();
      articulosCarrito.forEach(curso => {
           const row = document.createElement('tr');
           row.innerHTML = `
+               <td>  
+                    <img src="${curso.imagen}" width=100>
+               </td>
+               <td>${curso.titulo}</td>
+               <td>${curso.precio}</td>
+               <td>${curso.cantidad} </td>
                <td>
-                    ${curso.titulo}
+                    <a href="#" class="borrar-curso" data-id="${curso.id}">X</a>
                </td>
           `;
-          // Agrega el HTML del carrito en el tbody
           contenedorCarrito.appendChild(row);
      });
-
 }
 
 // Elimina los cursos del carrito en el DOM
-function limnpiaHTML() {
+function limpiarHTML() {
      // forma lenta
      // contenedorCarrito.innerHTML = '';
-     // forma rapida (recomendada) es decir con mejor performance
+
+     // forma rapida (recomendada)
      while(contenedorCarrito.firstChild) {
           contenedorCarrito.removeChild(contenedorCarrito.firstChild);
       }
