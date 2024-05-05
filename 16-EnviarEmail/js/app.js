@@ -14,10 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
     //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
     function validar(e) {
         if(e.target.value.trim() === ''){
-            console.log('Campo vacio')
+            // console.log('Campo vacio')
+            mostrarAlerta();
         }else{
             console.log('Si hay algo')
         }
+    }
+
+    function mostrarAlerta(){
+        //Generar alerta con HTML
+        const error = document.createElement('P');
+        error.textContent= 'Hubo un error...'
+        console.log(error);
     }
 
 });
