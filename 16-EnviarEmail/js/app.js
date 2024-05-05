@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
     function validar(e) {
-        console.log(e.target.value)
+        if(e.target.value.trim() === ''){
+            console.log('Campo vacio')
+        }else{
+            console.log('Si hay algo')
+        }
     }
 
 });
