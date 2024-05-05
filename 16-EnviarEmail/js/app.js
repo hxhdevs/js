@@ -5,7 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputMensaje = document.querySelector('#mensaje');
 
     // Asignar eventos
-    inputEmail.addEventListener('blur', function(e){
-        console.log(e.target);
-    });
+    // se llama la funcion sin parentesis para que se ejecute al disparar el evento
+    //de lo contrario se ejecuta en automatico con ()
+    inputEmail.addEventListener('blur', validar);
+    inputAsunto.addEventListener('blur', validar);
+    inputMensaje.addEventListener('blur', validar);
+
+    //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
+    function validar(e) {
+        console.log(e.target.value)
+    }
+
 });
