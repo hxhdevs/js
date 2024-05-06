@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
     const email = {
         email: '',
         asunto: '',
         mensaje: ''
     }
+
     // Seleccionar los elementos de la interfaz
     const inputEmail = document.querySelector('#email');
     const inputAsunto = document.querySelector('#asunto');
@@ -21,21 +23,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     formulario.addEventListener('submit', enviarEmail);
 
-    btnReset.addEventListener('click', function(e){
+    btnReset.addEventListener('click', function(e) {
         e.preventDefault();//evitamos event bubbling
-        email.email= '';
-        email.asunto= '';
-        email.mensaje= '';
-        formulario.reset();
-        comprobarEmail();
-    });
+        resetFormulario();
+    })
 
     function enviarEmail(e){
         e.preventDefault();
 
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
-        console.log('enviando...');
+        
+        setTimeout(() =>{
+            spinner.classList.remove('flex');
+            spinner.classList.add('hidden');
+            
+            resetFormulario();
+        },3000);
     }
     //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
     function validar(e) {
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         limpiarAlerta(referencia);
 
         const error = document.createElement('P');
-        error.textContent = mensaje
+        error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white','p-2','text-center');
         // console.log(error);
         //Inyectar error al formulario
@@ -97,4 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
             btnSubmit.classList.remove('opacity-50');
             btnSubmit.disabled = false;
     }
+
+    function resetFormulario() {
+        // reiniciar el objeto
+        email.email = '';
+        email.asunto = '';
+        email.mensaje = '';
+
+        formulario.reset();
+        comprobarEmail();
+    }
 });
+
