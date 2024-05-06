@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if(e.target.value.trim() === ''){
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);//cambiamos por template strings con target
             //pasamos dos parametros ahora es mensaje y referencia con target para ver que elemento mostraremos
-        }else{
-            console.log('Si hay algo')
+        // }else{
+        //     console.log('Si hay algo')
+        return;
         }
+
+        limpiarAlerta(e.target.parentElement);
     }
 
     function mostrarAlerta(mensaje, referencia){//Ahora recibimos dos parametros
         //Generar alerta con HTML
-        const alerta = referencia.querySelector('.bg-red-600');
-        if(alerta){
-            alerta.remove();
-        }
+        limpiarAlerta(referencia);
 
         const error = document.createElement('P');
         error.textContent = mensaje
@@ -37,4 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
+    function limpiarAlerta(referencia){
+        const alerta = referencia.querySelector('.bg-red-600');
+        if(alerta){
+            alerta.remove();
+        }
+    }
 });
