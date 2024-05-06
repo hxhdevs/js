@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const email = {
+        email: '',
+        asunto: '',
+        mensaje: ''
+    }
     // Seleccionar los elementos de la interfaz
     const inputEmail = document.querySelector('#email');
     const inputAsunto = document.querySelector('#asunto');
@@ -26,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         limpiarAlerta(e.target.parentElement);
+        
+        //Asignar valores 
+        email[e.target.name] = e.target.value.trim().toLowerCase();
+        //console.log(email);
+        comprobarEmail();
     }
 
     function mostrarAlerta(mensaje, referencia){//Ahora recibimos dos parametros
@@ -52,4 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultado = regex.test(email);
         return resultado;
     }
+
+    function comprobarEmail() {
+        console.log(Object.values(email).includes('')) ;
+
+    }
+
 });
