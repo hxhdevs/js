@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
+    const btnSubmit = document.querySelector('#formulario button[type="submit"]');
     // Asignar eventos
     // se llama la funcion sin parentesis para que se ejecute al disparar el evento
     //de lo contrario se ejecuta en automatico con ()
-    inputEmail.addEventListener('blur', validar);
+    inputEmail.addEventListener('blur', validar);//cambiar a input si quieres hacerlo mas en tiempo real y reactivo
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
 
@@ -20,13 +21,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function validar(e) {
         if(e.target.value.trim() === ''){
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);//cambiamos por template strings con target
+            email[e.target.name] = '';
             //pasamos dos parametros ahora es mensaje y referencia con target para ver que elemento mostraremos
         // }else{
         //     console.log('Si hay algo')
-        return;
+            comprobarEmail();
+            return;
         }
         if(e.target.id ==='email' && !validarEmail(e.target.value)){
             mostrarAlerta('El email no es valido', e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();   
             return;
         }
 
@@ -64,8 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function comprobarEmail() {
-        console.log(Object.values(email).includes('')) ;
-
+        if(Object.values(email).includes('')){
+            btnSubmit.classList.add('opacity-50');
+            btnSubmit.disabled = true;
+            return
+        } 
+            btnSubmit.classList.remove('opacity-50');
+            btnSubmit.disabled = false;
     }
-
 });
