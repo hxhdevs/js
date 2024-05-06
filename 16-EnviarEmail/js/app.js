@@ -11,12 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulario = document.querySelector('#formulario');
     const btnSubmit = document.querySelector('#formulario button[type="submit"]');
     const btnReset = document.querySelector('#formulario button[type="reset"]');
+    const spinner = document.querySelector('#spinner');
     // Asignar eventos
     // se llama la funcion sin parentesis para que se ejecute al disparar el evento
     //de lo contrario se ejecuta en automatico con ()
     inputEmail.addEventListener('blur', validar);//cambiar a input si quieres hacerlo mas en tiempo real y reactivo
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
+    
+    formulario.addEventListener('submit', enviarEmail);
 
     btnReset.addEventListener('click', function(e){
         e.preventDefault();//evitamos event bubbling
@@ -27,6 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
         comprobarEmail();
     });
 
+    function enviarEmail(e){
+        e.preventDefault();
+
+        spinner.classList.add('flex');
+        spinner.classList.remove('hidden');
+        console.log('enviando...');
+    }
     //hacemos una funcion reutilizable y limpia para optimizar los addEventListener
     function validar(e) {
         if(e.target.value.trim() === ''){
