@@ -89,7 +89,18 @@ function llenarSelect(){
 function filtrarAuto(){//uso de funciones de alto nivel es decir una funcion llamando a otra dentro de si
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor)//function chaining
  //   console.log(resultado);
-    mostrarAutos(resultado)
+    if(resultado.length){
+        mostrarAutos(resultado);
+    }else{
+        noResultado();
+    }
+}
+function noResultado(){
+    limpiarHTML();
+    const noResultado = document.createElement('div');
+    noResultado.classList.add('alerta','error');
+    noResultado.textContent = 'No hay resultados, intenta con otros terminos de busqueda';
+    resultado.appendChild(noResultado);
 }
 
 function filtrarMarca(auto){
