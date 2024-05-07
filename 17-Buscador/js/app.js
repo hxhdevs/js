@@ -23,7 +23,7 @@ const datosBusqueda = {
     color :'',
 }
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarAutos();
+    mostrarAutos(autos);
 
     llenarSelect();
 });
@@ -58,18 +58,22 @@ color.addEventListener('change', e =>{
     console.log(datosBusqueda)
 })
 
-function mostrarAutos(){
+function mostrarAutos(autos){
+    limpiarHTML(); //elimina el html previo
     autos.forEach(auto => {
-
         const {marca,modelo,year,puertas,transmision,precio,color}=auto;
         const autoHTML = document.createElement('p');
-
         autoHTML.innerHTML = `
             <p>${auto.marca} ${auto.modelo} - ${auto.year} - ${auto.puertas} Puertas - Transmisión: ${auto.transmision} - Precio: ${auto.precio} - Color: ${auto.color}</p>
         `;
-        
         resultado.appendChild(autoHTML);
     })
+}
+//limpia HTML previo cuando hace una busqueda para mostrar resultados
+function limpiarHTML(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild)
+    }
 }
 
 function llenarSelect(){
@@ -84,7 +88,8 @@ function llenarSelect(){
 //funcion que filtra en base a la busqueda
 function filtrarAuto(){//uso de funciones de alto nivel es decir una funcion llamando a otra dentro de si
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear)//function chaining
-    console.log(resultado);
+ //   console.log(resultado);
+    mostrarAutos(resultado)
 }
 
 function filtrarMarca(auto){
