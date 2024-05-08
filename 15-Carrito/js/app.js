@@ -14,6 +14,11 @@ function cargarEventListeners() {
      carrito.addEventListener('click', eliminarCurso);
      // Forma limpia de vaciado
      //vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+     document.addEventListener('DOMContentLoaded', () => {//recuperamos datos almacenados del estorage
+          articulosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+          carritoHTML();
+     });
+
      vaciarCarritoBtn.addEventListener('click', () => {
           articulosCarrito = [];
           vaciarCarrito();
@@ -78,6 +83,11 @@ function carritoHTML() {//cada que mostramos el carrito con nueva informacion lo
           `;
           contenedorCarrito.appendChild(row);
      });
+     sincronizarStorage();//almacenamos en storage despyes de crear el objeto
+}
+
+function sincronizarStorage(){// ahora almacenamos el carrito en local storage con esta funcion
+     localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
 }
 
 function vaciarCarrito() {// Elimina los cursos del carrito en el DOM
