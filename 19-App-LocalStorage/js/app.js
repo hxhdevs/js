@@ -1,4 +1,4 @@
-// Variables
+// Variables globales
 const listaTweets = document.querySelector('#lista-tweets');
 const formulario = document.querySelector('#formulario');
 let tweets = [];
@@ -9,6 +9,14 @@ eventListeners();
 function eventListeners() {
      //Cuando se envia el formulario
      formulario.addEventListener('submit', agregarTweet);    
+
+     //cuando el documento esta listo
+     document.addEventListener('DOMContentLoaded',() =>{
+          tweets = JSON.parse(localStorage.getItem('tweets')) || [];//recuperamos de storage y si no tenemos nada asignamops array vacio entonces deja de dar null
+          console.log(tweets)
+          crearHTML()
+     
+     });
 }
 
 // Añadir tweet del formulario
@@ -66,6 +74,11 @@ function crearHTML(){
                listaTweets.appendChild(li);
           });
      }
+     almacenandoInLocalStorage();
+}
+
+function almacenandoInLocalStorage() {
+     localStorage.setItem('tweets', JSON.stringify(tweets));
 }
 
 function limpiarHTML(){
