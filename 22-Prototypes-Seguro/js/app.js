@@ -1,7 +1,7 @@
 // Constructor para Seguro
-function Seguro(marca, anio, tipo) {
+function Seguro(marca, year, tipo) {
      this.marca = marca;
-     this.anio = anio;
+     this.year = year;
      this.tipo = tipo;
 }
 
@@ -9,7 +9,7 @@ Seguro.prototype.cotizarSeguro = function(){
      // 1 = americano 1.15
      // 2 = Asiatico 1.05
      // 3 = Europeo 1.35
-     console.log(this.marca);
+//     console.log(this.marca);
      let cantidad;
      const base = 2000;
 
@@ -23,11 +23,13 @@ Seguro.prototype.cotizarSeguro = function(){
           case '3':
                cantidad = base*1.35;
                break;
+          default:
+               break;
      }
      const diferencia = new Date().getFullYear() - this.year;
 
      cantidad -= ((diferencia*3) * cantidad)/100;
-
+     //si el seguro es basico * 30% y si es completro %50
      if(this.tipo === 'basico'){
           cantidad *= 1.30;
      } else{
@@ -39,7 +41,7 @@ Seguro.prototype.cotizarSeguro = function(){
 // Todo lo que se muestra
 function UI() {}
 
-UI.prototype.llenarOpciones = function () {
+UI.prototype.llenarOpciones =  ()=> {
      const max = new Date().getFullYear(),
            min = max - 20;
 
@@ -57,16 +59,16 @@ UI.prototype.mostrarMensaje = function(mensaje,tipo){
      const div = document.createElement('div');
 
      if(tipo === 'error'){
-          div.classList.add('mensaje','error');
+          div.classList.add('error');
      }else{
-          div.classList.add('mensaje','correcto');
+          div.classList.add('correcto');
      }
      div.classList.add('mensaje', 'mt-10');
      div.textContent = mensaje;
-     formulario.insertBefore(div, document.querySelector('#resultado'));
+
      //insertar en el html
-     //const formulario = document.querySelector('#cotizar-seguro');
-     
+     const formulario = document.querySelector('#cotizar-seguro');
+     formulario.insertBefore(div, document.querySelector('#resultado'));
      setTimeout(()=>{
           div.remove();//aplicamos remove con settimeout
      },1000);
@@ -139,6 +141,7 @@ function cotizarSeguro(e){
           ui.mostrarMensaje('Todos los campos son obligatorios','error');
           return;
      }
+
      ui.mostrarMensaje('cotizando..','exito');//mostramos successfull
      // console.log(' Cotizando')
      //Ocultar cotizaciones previas
