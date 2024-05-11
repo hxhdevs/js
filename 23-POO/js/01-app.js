@@ -13,6 +13,14 @@ class Cliente { // El Nombre debe ser en mayusculas... Y esta forma se le conoce
         this.saldo = saldo;
     }
 
+    mostraInformacion(){
+        return `Cliente ${this.nombre}, tu saldo es de ${this.saldo}`;
+    }
+
+    static bienvenida(){
+        return `Bienvenida al cajero`;
+    }
+
 }
 
 
@@ -20,7 +28,8 @@ class Cliente { // El Nombre debe ser en mayusculas... Y esta forma se le conoce
 //introducieron lo que se conoce como constructores...
 //en algunos lenguajes el constructor es el mismo nombre de la clase pero en javascript es constructaor
 const nombre = new Cliente('Elih', 400);
-
+console.log(nombre.mostraInformacion());
+console.log(Cliente.bienvenida());
 console.log(nombre);
 
 
@@ -30,7 +39,11 @@ const Cliente2 = class {
         this.nombre = nombre;
         this.saldo = saldo;
     }
+    mostraInformacion(){
+        return `Cliente ${this.nombre}, tu saldo es de ${this.saldo} berries`;
+    }
 }
 
-const nombre2 = new Cliente2('Elih', 400);
+const nombre2 = new Cliente2('Elih Freecs', 400);
+console.log(nombre2.mostraInformacion());
 console.log(nombre2);
