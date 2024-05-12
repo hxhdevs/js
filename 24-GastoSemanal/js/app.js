@@ -18,6 +18,11 @@ class Presupuesto{
         this.restante = Number(presupuesto);
         this.gastos =[];
     }
+
+    nuevoGasto(gasto){
+        this.gastos = [...this.gastos,gasto];
+        console.log(this.gastos); 
+    }
 }
 
 
@@ -81,4 +86,15 @@ function agregarGasto(){
     }else if(cantidad <= 0 || isNaN(cantidad)){
         ui.imprimirAlerta('Cantidad no valida','error');
     }
+
+    //Generar un objeto tipo gasto
+    const gasto ={nombre,cantidad, id: Date.now()}
+
+    //Añade un nuevo presupuesto
+    presupuesto.nuevoGasto(gasto)
+    //   console.log(gasto);
+    //Mensaje de todo bien
+    ui.imprimirAlerta('Gasto agregado correctamente');
+    //Reinicia el formulario
+    formulario.reset();
 }
