@@ -10,8 +10,24 @@ function eventListeners() {
 }
 
 // Classes
+class Presupuesto{
+    constructor(presupuesto){
+        this.presupuesto =Number(presupuesto);
+        this.restante = Number(presupuesto);
+        this.gastos =[];
+    }
+}
+
+
+class UI{
+
+}
+//Instanciar
+const ui = new UI();//Clase global
+let presupuesto;//variable global
 
 //Funciones
+
 function preguntarPresupuesto() {
     const presupuestoUsuario = prompt('¿Cual es tu presupuesto?');
 
@@ -20,4 +36,7 @@ function preguntarPresupuesto() {
     if( presupuestoUsuario === '' || presupuestoUsuario === null || isNaN(presupuestoUsuario) || presupuestoUsuario <= 0 ) {
         window.location.reload();
     }
+
+    presupuesto = new Presupuesto(presupuestoUsuario);
+    console.log(presupuesto);
 }
