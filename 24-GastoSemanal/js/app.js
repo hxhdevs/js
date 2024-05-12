@@ -20,7 +20,12 @@ class Presupuesto{
 
 
 class UI{
-
+    insertarPresupuesto(cantidad){
+        const {presupuesto, restante} = cantidad;//extrayendo valor de prompt y pasandolo a 2 variables con el mismo valor del parametro
+        //Agregando al HTML
+        document.querySelector('#total').textContent = presupuesto;
+        document.querySelector('#restante').textContent = restante;
+    }
 }
 //Instanciar
 const ui = new UI();//Clase global
@@ -38,5 +43,6 @@ function preguntarPresupuesto() {
     }
 
     presupuesto = new Presupuesto(presupuestoUsuario);
-    console.log(presupuesto);
+ //   console.log(presupuesto);
+    ui.insertarPresupuesto(presupuesto);
 }
