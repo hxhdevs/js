@@ -5,6 +5,8 @@ const emailInput = document.querySelector('#email')
 const fechaInput = document.querySelector('#fecha')
 const sintomasInput = document.querySelector('#sintomas')
 
+const formulario = document.querySelector('#formulario-cita')
+
 
 //Eventos
 pacienteInput.addEventListener('change',datosCita)
@@ -25,12 +27,17 @@ const citaObj = {
 
 function datosCita(e){
     citaObj[e.target.name] = e.target.value
-    console.log(citaObj)
+    // console.log(citaObj)
 }
 
 function submitCita(e){
     e.preventDefault();
-    console.log();
-}
 
-console.log(citaObj)
+    const {paciente,propietario,email,fecha,sintomas} = citaObj
+    if (paciente.trim()===''|| propietario.trim()===''||email.trim()==='') {
+        console.log('Todos los campos son obligatorios');
+        return
+    }
+    // console.log('despues del IF');
+
+}
