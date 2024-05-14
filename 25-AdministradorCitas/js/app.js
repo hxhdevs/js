@@ -25,24 +25,6 @@ const citaObj = {
     sintomas: ''
 }
 
-function datosCita(e){//funcion reutilizable que escucha los eventos
-    citaObj[e.target.name] = e.target.value
-    // console.log(citaObj)
-}
-
-function submitCita(e){
-    e.preventDefault();
-
-    if (Object.values(citaObj).some(valor => valor.trim()=== '')) {
-        new Notificacion({
-            texto:'Todos los campos son obligatorios',
-            tipo: 'error'
-        })
-        return
-    }
-    // console.log('despues del IF');
-}
-
 class Notificacion{
     constructor({texto, tipo}){
         this.texto = texto
@@ -75,3 +57,36 @@ class Notificacion{
         },1000)
     }
 }
+
+class AdminCitas{
+    constructor() {
+        this.citas = []
+    }   
+
+    agregar(cita){
+        this.citas = [...this.citas, cita]
+        console.log(this.citas)
+    }
+}
+
+function datosCita(e){//funcion reutilizable que escucha los eventos
+    citaObj[e.target.name] = e.target.value
+    // console.log(citaObj)
+}
+
+const citas = new AdminCitas()
+
+function submitCita(e){
+    e.preventDefault();
+
+    if (Object.values(citaObj).some(valor => valor.trim() === '')) {
+        new Notificacion({
+            texto:'Todos los campos son obligatorios',
+            tipo: 'error'
+        })
+        return
+    }
+    // console.log('despues del IF');
+    citas.agregar(citaObj)
+}
+
