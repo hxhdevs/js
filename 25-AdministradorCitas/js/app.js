@@ -25,7 +25,7 @@ const citaObj = {
     sintomas: ''
 }
 
-function datosCita(e){
+function datosCita(e){//funcion reutilizable que escucha los eventos
     citaObj[e.target.name] = e.target.value
     // console.log(citaObj)
 }
@@ -33,10 +33,35 @@ function datosCita(e){
 function submitCita(e){
     e.preventDefault();
 
-    if (Object.values(citaObj).some(valor => valor.trim()==='')) {
-        console.log('Todos los campos son obligatorios');
+    if (Object.values(citaObj).some(valor => valor.trim()=== '')) {
+        new Notificacion({
+            texto:'Todos los campos son obligatorios',
+            tipo: 'error'
+        })
         return
     }
     // console.log('despues del IF');
+}
 
+class Notificacion{
+    constructor({texto, tipo}){
+        this.texto = texto
+        this.tipo = tipo
+        this.mostrar()
+    }
+
+    mostrar(){
+        //Creamos la notificacion
+        const alerta = document.createElement('DIV')
+        alerta.classList.add('text-center','w-full','p-3','text-white','my-5','alert','uppercase','font-bold','text-sm')
+
+        //Agregar clase si es de tipo error
+        this.tipo === 'error' ? alerta.classList.add('bg-red-500'): alerta.classList.add('bg-green-500')
+
+        //Mensaje de error
+        alerta.textContent = this.texto
+
+        //Insertar en el DOM
+        formulario.parentElement.insertBefore(alerta, formulario)       
+    }
 }
