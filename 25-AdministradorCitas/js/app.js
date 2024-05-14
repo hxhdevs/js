@@ -130,5 +130,23 @@ function submitCita(e){
     }
     // console.log('despues del IF');
     citas.agregar(citaObj)
+    formulario.reset()
+    reiniciarObjetoCita()
+}
+
+function reiniciarObjetoCita(){
+    //Reiniciar el objeto citaObj
+    // citaObj.paciente ='';
+    // citaObj.propietario ='';
+    // citaObj.email ='';
+    // citaObj.fecha ='';
+    // citaObj.sintomas ='';
+    Object.assign(citaObj,{//esta opcion es la misma que la que esta comentada arriba es decir cumplen con la misma funcionalidad
+        paciente: '',
+        propietario: '',
+        email: '',
+        fecha: '',
+        sintomas: ''
+    })
 }
 
