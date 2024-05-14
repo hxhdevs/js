@@ -8,6 +8,11 @@ const sintomasInput = document.querySelector('#sintomas')
 const formulario = document.querySelector('#formulario-cita')
 
 const contenedorCitas = document.querySelector('#citas')
+
+const btnEditar = document.querySelector('btn-editar')
+btnEditar?.addEventListener('click', () => {//optional chaining
+    alert('Diste click en editar...')
+})
 //Eventos
 pacienteInput.addEventListener('change',datosCita)
 propietarioInput.addEventListener('change',datosCita)
@@ -38,7 +43,7 @@ class Notificacion{
         alerta.classList.add('text-center','w-full','p-3','text-white','my-5','alert','uppercase','font-bold','text-sm')
         //Eliminar duplicado de alertas
         const alertaPrevia = document.querySelector('.alert')
-        alertaPrevia?.remove()//forma reciente o moderna
+        alertaPrevia?.remove()//forma reciente o moderna llamada optional chainnig
         // if(alertaPrevia){//metodo tradicional con IF
         //     alertaPrevia.remove()
         // }
@@ -104,6 +109,9 @@ class AdminCitas{
             const btnEditar = document.createElement('button');
             btnEditar.classList.add('py-2', 'px-10', 'bg-indigo-600', 'hover:bg-indigo-700', 'text-white', 'font-bold', 'uppercase', 'rounded-lg', 'flex', 'items-center', 'gap-2');
             btnEditar.innerHTML = 'Editar <svg fill="none" class="h-5 w-5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>'
+            btnEditar.onclick = function({}){
+                alert('Diste click en editar');
+            }
 
             const btnEliminar = document.createElement('button');
             btnEliminar.classList.add('py-2', 'px-10', 'bg-red-600', 'hover:bg-red-700', 'text-white', 'font-bold', 'uppercase', 'rounded-lg', 'flex', 'items-center', 'gap-2');
