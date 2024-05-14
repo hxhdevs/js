@@ -129,9 +129,14 @@ function submitCita(e){
         return
     }
     // console.log('despues del IF');
-    citas.agregar(citaObj)
+    citas.agregar({...citaObj})//pasamos una copia para vitar sobreescritura en el objeto sobre el div
     formulario.reset()
     reiniciarObjetoCita()
+    
+    new Notificacion({//tomamos el nuevo onjeto y pasamos diferente tipo y texto
+        texto:'Paciente Registrado',
+        tipo: 'exito'
+    })
 }
 
 function reiniciarObjetoCita(){
