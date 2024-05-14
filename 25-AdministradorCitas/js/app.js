@@ -54,7 +54,12 @@ class Notificacion{
         //Creamos la notificacion
         const alerta = document.createElement('DIV')
         alerta.classList.add('text-center','w-full','p-3','text-white','my-5','alert','uppercase','font-bold','text-sm')
-
+        //Eliminar duplicado de alertas
+        const alertaPrevia = document.querySelector('.alert')
+        alertaPrevia?.remove()//forma reciente o moderna
+        // if(alertaPrevia){//metodo tradicional con IF
+        //     alertaPrevia.remove()
+        // }
         //Agregar clase si es de tipo error
         this.tipo === 'error' ? alerta.classList.add('bg-red-500'): alerta.classList.add('bg-green-500')
 
@@ -63,5 +68,10 @@ class Notificacion{
 
         //Insertar en el DOM
         formulario.parentElement.insertBefore(alerta, formulario)       
+
+        //Quitar alerta
+        setTimeout(() => {
+            alerta.remove()
+        },1000)
     }
 }
