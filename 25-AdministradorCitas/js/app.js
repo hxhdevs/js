@@ -23,6 +23,7 @@ sintomasInput.addEventListener('change',datosCita)
 formulario.addEventListener('submit', submitCita)
 // Objeto de Cita
 const citaObj = {
+    id: generarId(),
     paciente: '',
     propietario: '',
     email: '',
@@ -71,7 +72,8 @@ class AdminCitas{
     agregar(cita){
         this.citas = [...this.citas, cita]
         this.mostrar()
-        //console.log(this.citas)
+        
+        console.log(this.citas)
     }
 
     mostrar(){
@@ -145,6 +147,8 @@ const citas = new AdminCitas()
 function submitCita(e){
     e.preventDefault();
 
+    console.log(citaObj)
+
     if (Object.values(citaObj).some(valor => valor.trim() === '')) {
         new Notificacion({
             texto:'Todos los campos son obligatorios',
@@ -156,7 +160,6 @@ function submitCita(e){
     citas.agregar({...citaObj})//pasamos una copia para vitar sobreescritura en el objeto sobre el div
     formulario.reset()
     reiniciarObjetoCita()
-    
     new Notificacion({//tomamos el nuevo onjeto y pasamos diferente tipo y texto
         texto:'Paciente Registrado',
         tipo: 'exito'
@@ -165,18 +168,24 @@ function submitCita(e){
 
 function reiniciarObjetoCita(){
     //Reiniciar el objeto citaObj
+    // citaObj.id = generarId();
     // citaObj.paciente ='';
     // citaObj.propietario ='';
     // citaObj.email ='';
     // citaObj.fecha ='';
     // citaObj.sintomas ='';
     Object.assign(citaObj,{//esta opcion es la misma que la que esta comentada arriba es decir cumplen con la misma funcionalidad
+        id: generarId(),
         paciente: '',
         propietario: '',
         email: '',
         fecha: '',
         sintomas: ''
     })
+}
+
+function generarId(){
+    return Math.random().toString(36).substring(2)+Date.now()
 }
 
 function cargarEdicion(cita){
