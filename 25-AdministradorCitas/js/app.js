@@ -6,7 +6,6 @@ const fechaInput = document.querySelector('#fecha')
 const sintomasInput = document.querySelector('#sintomas')
 
 const formulario = document.querySelector('#formulario-cita')
-
 const contenedorCitas = document.querySelector('#citas')
 
 // const btnEditar = document.querySelector('btn-editar')
@@ -21,6 +20,9 @@ fechaInput.addEventListener('change',datosCita)
 sintomasInput.addEventListener('change',datosCita)
 
 formulario.addEventListener('submit', submitCita)
+
+let editando = false
+
 // Objeto de Cita
 const citaObj = {
     id: generarId(),
@@ -156,14 +158,21 @@ function submitCita(e){
         })
         return
     }
-    // console.log('despues del IF');
-    citas.agregar({...citaObj})//pasamos una copia para vitar sobreescritura en el objeto sobre el div
+
+    if (editando) {
+        console.log('Editando registro')
+    } else{
+        citas.agregar({...citaObj})//pasamos una copia para vitar sobreescritura en el objeto sobre el div    
+        new Notificacion({//tomamos el nuevo onjeto y pasamos diferente tipo y texto
+            texto:'Paciente Registrado',
+            tipo: 'exito'
+        })
+        console.log('nuevo registro')
+    }
     formulario.reset()
     reiniciarObjetoCita()
-    new Notificacion({//tomamos el nuevo onjeto y pasamos diferente tipo y texto
-        texto:'Paciente Registrado',
-        tipo: 'exito'
-    })
+    
+    // console.log('despues del IF');
 }
 
 function reiniciarObjetoCita(){
@@ -189,5 +198,13 @@ function generarId(){
 }
 
 function cargarEdicion(cita){
-    console.log(cita)
+    Object.assign(citaObj,cita)
+
+    pacienteInput.value = cita.paciente
+    propietarioInput.value = cita.propietario
+    emailInput.value = cita.email
+    fechaInput.value = cita.fecha
+    sintomasInput.value = cita.sintomas
+
+    editando = true
 }
