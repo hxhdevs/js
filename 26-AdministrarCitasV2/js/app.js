@@ -13,6 +13,12 @@ class Citas {
     constructor(){
         this.citas = [];
     }
+
+    agregarCita(cita){
+        this.citas = [...this.citas, cita];
+
+        console.log(this.citas);
+    }
 }
 
 class UI{
@@ -85,5 +91,26 @@ function nuevaCita(e){
         // console.log('Todos los campos son obligatorios');
         return;
     }
-    
+    //generar id unico
+    citaObj.id = Date.now();
+
+    //creando una nueva cita
+    administrarCitas.agregarCita({...citaObj});
+
+    //Reiniciar Obejto
+    reiniciarObjeto();
+
+    //Reiniciar formulario
+    formulario.reset();
+
+    //Mostrar el html de las citas
+}
+
+function reiniciarObjeto(){
+    citaObj.mascota = '';
+    citaObj.propietario = '';
+    citaObj.telefono = '';
+    citaObj.fecha = '';
+    citaObj.hora = '';
+    citaObj.sintomas = '';
 }
