@@ -25,6 +25,10 @@ class Citas {
     eliminarCita(id){
         this.citas = this.citas.filter(cita => cita.id !== id)//Eliminamos con filter
     }
+
+    editarCita(citaactualizada){
+        this.citas = this.citas.map(cita => cita.id === citaactualizada.id ? citaactualizada : cita);//map crea ujn nuevo arreglo reescribiendolo
+    }
 }
 
 class UI{
@@ -168,7 +172,8 @@ function nuevaCita(e){
     if (editando) {
         ui.imprimirAlerta('Editando Correctamente')
         //Pasar el objeto de la cita a edicion
-        formulario.querySelector('button[type="submit"]').textContent='Crear cita';
+        administrarCitas.editarCita({...citaObj})//le pasamos una copia del objeto
+        formulario.querySelector('button[type="submit"]').textContent='Crear cita';//regresamos el valor del boton al valor original
 
         // Quitar modo edicion
         editando = false;
