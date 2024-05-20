@@ -24,3 +24,8 @@ export class Cliente{//agregamos export para poder exportar la clase
         return `Cliente ${this.nombre} - Ahorro ${this.ahorro}`;
     }
 }
+
+export default function nuevaFuncion(){
+// export default function (){
+    console.log('Soy el xport default, puede irme con o sin nombre dela funcion')
+}
