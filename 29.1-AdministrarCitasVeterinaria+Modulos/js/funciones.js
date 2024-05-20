@@ -1,8 +1,21 @@
+import Citas from './classes/Citas.js';
+import UI from './classes/UI.js';
 
-const ui = new UI();
+import { 
+    mascotaInput,
+    propietarioInput,
+    telefonoInput,
+    fechaInput,
+    horaInput,
+    sintomasInput,
+    formulario
+} from './selectores.js';
+//se sugiere primero pasar todo y al ultimo agregar los exports dentro de {}
+
 const administrarCitas = new Citas();
+const ui = new UI(administrarCitas);
 
-let editando;
+let editando = false;
 
 const citaObj = {
     mascota: '',

@@ -1,3 +1,6 @@
+import {eliminarCita,cargarEdicion} from '../funciones.js'
+import {contenedorCitas, heading } from '../selectores.js'
+
 class UI{
     
     imprimirAlerta(mensaje,tipo){
@@ -84,6 +87,16 @@ class UI{
             contenedorCitas.appendChild(divCita);
         })
     }
+
+    textoHeading(citas){
+        if(citas.length > 0){
+            heading.textContent ='Administra tus citas'
+        } else{
+            heading.textContent = 'No hjay citas, comienza creando una'
+        }
+    }
+
+
     limpiarHTML() {
         while(contenedorCitas.firstChild){
             contenedorCitas.removeChild(contenedorCitas.firstChild)
