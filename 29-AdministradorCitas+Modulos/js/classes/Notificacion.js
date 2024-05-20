@@ -1,3 +1,4 @@
+import {formulario} from '../selectores.js'
 // export class Notificacion{//cualquiera de las fos maneras es valida
 export default class Notificacion{
 // class Notificacion{//forma valida solo si la llamamos al final
