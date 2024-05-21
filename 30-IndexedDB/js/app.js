@@ -20,6 +20,20 @@ function crmDB() {
 
     // este método solo corre una vez
     crmDB.onupgradeneeded = function(e) {
-        console.log('Este metodo solo se ejecuta una vez...');
+        // console.log(e.target.result);
+        const db = e.target.result;
+
+        const objectStore = db.createObjectStore('crm',{
+            keyPath:'crm',
+            autoIncrement: true
+        });
+
+        //Definir las columnas
+        objectStore.createIndex('nombre','nombre',{unique: false});
+        objectStore.createIndex('email','email',{unique: false});
+        objectStore.createIndex('telefono','telefono',{unique: false});
+
+
+        console.log('Columnas creadas');
     }
 }
