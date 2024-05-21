@@ -1,3 +1,4 @@
+let DB;
 //Campos del formulario
 const mascotaInput = document.querySelector('#mascota');
 const propietarioInput = document.querySelector('#propietario');
@@ -9,7 +10,26 @@ const sintomasInput = document.querySelector('#sintomas');
 const formulario = document.querySelector('#nueva-cita');// Contenedor para las citas
 const contenedorCitas = document.querySelector('#citas');
 
-let editando;
+let editando = false;
+
+window.onload = () => {
+    eventListeners();
+
+    crearDB();
+}
+
+// Registrar eventos
+
+function eventListeners() {
+    mascotaInput.addEventListener('input', datosCita);
+    propietarioInput.addEventListener('input', datosCita);
+    telefonoInput.addEventListener('input', datosCita);
+    fechaInput.addEventListener('input', datosCita);
+    horaInput.addEventListener('input', datosCita);
+    sintomasInput.addEventListener('input', datosCita);
+
+    formulario.addEventListener('submit', nuevaCita);
+}
 
 class Citas {
     constructor(){
@@ -127,19 +147,6 @@ class UI{
 const ui = new UI();
 const administrarCitas = new Citas();
 
-// Registrar eventos
-eventListeners();
-function eventListeners() {
-    mascotaInput.addEventListener('input', datosCita);
-    propietarioInput.addEventListener('input', datosCita);
-    telefonoInput.addEventListener('input', datosCita);
-    fechaInput.addEventListener('input', datosCita);
-    horaInput.addEventListener('input', datosCita);
-    sintomasInput.addEventListener('input', datosCita);
-
-    formulario.addEventListener('submit', nuevaCita);
-}
-
 const citaObj = {
     mascota: '',
     propietario: '',
@@ -248,4 +255,42 @@ function cargarEdicion(cita){
     formulario.querySelector('button[type="submit"]').textContent='Guardar cambios';
 
     editando= true;
+}
+
+function crearDB() {
+    //crear BD en V1.0
+    const creadDB = window.indexedDB.open('citas',1);
+    //SIhay un error
+    crearDB.onerror = function(){
+        console.log('Hubo un error');
+    }
+
+    //Si todo sale bien
+    crearDB.onsuccess = function(){
+        console.log('BD creada');
+
+        DB = crearDB.result;
+        console.log(DB);
+    }
+
+    //Definir el scchema
+    crearDB.onupgradeneeded = function(e){
+        const db = e.target.result;
+
+        const objectStore = db.createObjectStore('citas',{
+            kayPath: 'id',
+            autoIncrement: true
+        });
+
+        objectStore.createIndex('mascota','mascota',{unique:false});
+        objectStore.createIndex('propietario','propietario',{unique:false});
+        objectStore.createIndex('telefono','telefono',{unique:false});
+        objectStore.createIndex('fecha','fecha',{unique:false});
+        objectStore.createIndex('hora','hora',{unique:false});
+        objectStore.createIndex('sintomas','sintomas',{unique:true});
+        objectStore.createIndex('id','id',{unique:true});
+        
+        console.log('DB Creada y lista');
+
+    }
 }
