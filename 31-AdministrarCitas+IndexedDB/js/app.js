@@ -220,7 +220,7 @@ function nuevaCita(e){
         objectStore.put(citaObj);
         transaction.oncomplete = () => {
             ui.imprimirAlerta('Guardado Correctamente');
-            
+
             formulario.querySelector('button[type="submit"]').textContent='Crear cita';//regresamos el valor del boton al valor original
             // Quitar modo edicion
             editando = false;
@@ -276,13 +276,14 @@ function reiniciarObjeto(){
 }
 
 function eliminarCita(id){
-    // console.log(id);
-    //Eliminar la cita
-    administrarCitas.eliminarCita(id);
-    //Muestra un mensaje 
-    ui.imprimirAlerta('La cita se elimino correctamente');
-    //Refresca las citas
-    ui.imprimirCitas();
+    const transaction = DB.transaction(['citas','readwrite']);
+    const objectStore = transaction.objectStore('citas');
+
+    objectStore.delete(id);
+    transaction.oncomplete = () =>{
+        console.log(`Cita ${id} eliminada...`);
+        ui.imprimirCitas();
+    }
 }
 
 //Funcion que carga los datos y el modo edicion
