@@ -160,7 +160,7 @@ class UI{
         }
     }
     textoHeading(resultado){
-        if (citas.length > 0) {
+        if (resultado.length > 0) {
             this.textoHeading.textContent = 'Administra tus citas'
         } else {
             this.textoHeading.textContent = 'No hay citas, comienza creando una'
@@ -210,14 +210,23 @@ function nuevaCita(e){
     }
 
     if (editando) {
-        ui.imprimirAlerta('Editando Correctamente')
+        // ui.imprimirAlerta('Editando Correctamente')
         //Pasar el objeto de la cita a edicion
         administrarCitas.editarCita({...citaObj})//le pasamos una copia del objeto
-        formulario.querySelector('button[type="submit"]').textContent='Crear cita';//regresamos el valor del boton al valor original
+        //Editando en IndexDB
+        const transaction = DB.transaction(['citas'], 'readwrite');
+        const objectStore = transaction.objectStore('citas');
 
-        // Quitar modo edicion
-        editando = false;
-        console.log('Modo edicion')
+        objectStore.put(citaObj);
+        transaction.oncomplete = () => {
+            ui.imprimirAlerta('Guardado Correctamente');
+            
+            formulario.querySelector('button[type="submit"]').textContent='Crear cita';//regresamos el valor del boton al valor original
+            // Quitar modo edicion
+            editando = false;
+            // console.log('Modo edicion')
+        }
+        
     } else{
         //Generando id unico
         citaObj.id = Date.now();
