@@ -20,8 +20,7 @@
         crearDB.onsuccess = function() {
             // guardamos el resultado
             DB = crearDB.result;
-        };
-    
+        }; 
         // este método solo corre una vez
         crearDB.onupgradeneeded = function(e) {
             // el evento que se va a correr tomamos la base de datos
