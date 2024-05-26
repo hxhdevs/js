@@ -78,7 +78,7 @@
                     console.log(cursor.value);
                     cursor.continue();     
                 } else{
-                    console.value('No hay mas registros')
+                    console.log('No hay mas registros')
                 }
             }
         }
