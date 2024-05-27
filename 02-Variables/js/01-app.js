@@ -47,6 +47,6 @@ var 01_;
 
 // más de una palabra.
 var  nombreProducto = 'Monitor 30 Pulgadas'; // CamelCase
-var nombre_producto = 'Monitor 30 Pulgadas'; //underscore o snake
+var nombre_producto = 'Monitor 30 Pulgadas'; //underscore
 var NombreProducto = 'Monitor 30 Pulgadas'; // pascal case
 var nombreproducto = 'Monitor 30 Pulgadas';

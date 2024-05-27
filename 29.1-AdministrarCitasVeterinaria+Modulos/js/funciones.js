@@ -1,6 +1,5 @@
 import Citas from './classes/Citas.js';
 import UI from './classes/UI.js';
-
 import { 
     mascotaInput,
     propietarioInput,
@@ -12,8 +11,8 @@ import {
 } from './selectores.js';
 //se sugiere primero pasar todo y al ultimo agregar los exports dentro de {}
 
+const ui = new UI();
 const administrarCitas = new Citas();
-const ui = new UI(administrarCitas);
 
 let editando = false;
 
@@ -106,15 +105,7 @@ export function eliminarCita(id){
 //Funcion que carga los datos y el modo edicion
 export function cargarEdicion(cita){
     const {mascota, propietario, telefono, fecha, hora, sintomas, id}= cita;
-    //llenar los inputs
-    mascotaInput.value = mascota;
-    propietarioInput.value = propietario;
-    telefonoInput.value = telefono;
-    fechaInput.value = fecha;
-    horaInput.value = hora;
-    sintomasInput.value = sintomas;
-    console.log(cita);
-
+    //Reiniciar el objeto
     citaObj.mascota = mascota;
     citaObj.propietario = propietario;
     citaObj.telefono = telefono;
@@ -123,6 +114,14 @@ export function cargarEdicion(cita){
     citaObj.sintomas = sintomas;
     citaObj.id = id;
 
+    //llenar los inputs
+    mascotaInput.value = mascota;
+    propietarioInput.value = propietario;
+    telefonoInput.value = telefono;
+    fechaInput.value = fecha;
+    horaInput.value = hora;
+    sintomasInput.value = sintomas;
+    // console.log(cita);
     formulario.querySelector('button[type="submit"]').textContent='Guardar cambios';
 
     editando= true;

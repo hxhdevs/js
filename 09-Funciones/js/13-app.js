@@ -63,5 +63,5 @@ reproductor.nuevaCancion = 'The Stillborn One';
 reproductor.obtenerCancion;
 reproductor.nuevoAlbum='Necrophagist';
 
-// si implementamos arrow functions en objetos incluso con get y set estos quedara mas limpios y elegantes como el sr dr profesor patricio
+// si implementamos arrow functions en objetos incluso con get y set estos quedara mas limpios y elegantes como el sr dr profesor
 

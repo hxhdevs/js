@@ -1,5 +1,6 @@
 import {eliminarCita,cargarEdicion} from '../funciones.js'
-import {contenedorCitas, heading } from '../selectores.js'
+import {contenedorCitas } from '../selectores.js'
+
 
 class UI{
     
@@ -88,13 +89,13 @@ class UI{
         })
     }
 
-    textoHeading(citas){
-        if(citas.length > 0){
-            heading.textContent ='Administra tus citas'
-        } else{
-            heading.textContent = 'No hjay citas, comienza creando una'
-        }
-    }
+    // textoHeading(citas){
+    //     if(citas.length > 0){
+    //         heading.textContent ='Administra tus citas'
+    //     } else{
+    //         heading.textContent = 'No hjay citas, comienza creando una'
+    //     }
+    // }
 
 
     limpiarHTML() {
