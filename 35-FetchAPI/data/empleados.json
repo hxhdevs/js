@@ -1,20 +1,20 @@
 [
      {
           "id" : 1,
-          "nombre" : "Juan",
-          "empresa" : "Código con Juan",
-          "trabajo" : "Desarrollador Web"
+          "nombre" : "Elih",
+          "empresa" : "HXH",
+          "trabajo" : "Pro Hunter"
      },
      {
           "id" : 2,
-          "nombre" : "Alejandra",
-          "empresa" : "Código con Juan",
-          "trabajo" : "Diseñadora"
+          "nombre" : "Alejandro",
+          "empresa" : "HXH",
+          "trabajo" : "Genei Ryodan"
      },
      {
           "id" : 3,
-          "nombre" : "Pedro",
-          "empresa" : "Código con Juan",
-          "trabajo" : "Aplicaciones Móviles"
+          "nombre" : "Beto",
+          "empresa" : "HXH",
+          "trabajo" : "Zodiac Member"
      }
 ]
