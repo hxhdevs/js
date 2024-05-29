@@ -33,7 +33,14 @@ function iniciarApp() {
     }
 
     function mostrarRecetas(recetas = []) {
-        recetas.forEach(receta => {
+        limpiarHTML(resultado)//limpiamos antes de solicitar
+
+        const heading = document.createElement('H2');
+        heading.classList.add('text-center','text-black','my-5')
+        heading.textContent = recetas.length ? 'Resultados': 'No hay resultados';
+        resultado.appendChild(heading);
+
+        recetas.forEach(receta => {//Iterar sobre el resultado
             // console.log(receta);
             const {idMeal, strMeal, strMealThumb} = receta;
 
@@ -71,6 +78,12 @@ function iniciarApp() {
             resultado.appendChild(recetaContenedor);
             console.log(recetaImagen);//cambiar el valor por las variables para depurar si se esta reciebiendo del API
         })
+    }
+
+    function limpiarHTML(selector){
+        while(selector.firstChild){
+            selector.removeChild(selector.firstChild);
+        }
     }
 }
 
