@@ -65,7 +65,7 @@ function iniciarApp() {
             const recetaButton = document.createElement('BUTTON');
             recetaButton.classList.add('btn','btn-danger','w-100');
             recetaButton.textContent = 'Ver receta';
-
+            
             recetaButton.onclick = function(){
                 seleccionarReceta(idMeal);
             }
@@ -83,16 +83,23 @@ function iniciarApp() {
             console.log(recetaImagen);//cambiar el valor por las variables para depurar si se esta reciebiendo del API
         })
     }
+    
+    function seleccionarReceta(id){
+        url = `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+        fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(resultado => mostrarRecetaModal(resultado.meals[0]))//aplicar console.log para ver resultado
+        console.log(id)
+    }
+    
+    function mostrarRecetaModal(receta){
+        
+    }
 
     function limpiarHTML(selector){
         while(selector.firstChild){
             selector.removeChild(selector.firstChild);
         }
-    }
-
-    function seleccionarReceta(id){
-        url = `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-        // console.log(id)
     }
 }
 
