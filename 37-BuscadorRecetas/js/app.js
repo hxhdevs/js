@@ -134,6 +134,15 @@ function iniciarApp() {
         btnFavorito.classList.add('btn','btn-danger','col');
         btnFavorito.textContent = 'Guardar Favorito';
 
+        //LocalStorage
+        btnFavorito.onclick = function(){
+            agregarFavorito({
+                id: idMeal,
+                titulo: strMeal,
+                img: strMealThumb
+            })
+        }
+
         const btnCerrarModal = document.createElement('BUTTON');
         btnCerrarModal.classList.add('btn','btn-secondary','col');
         btnCerrarModal.textContent = 'Cerrar';
@@ -144,6 +153,12 @@ function iniciarApp() {
         modalFooter.appendChild(btnCerrarModal);
         //Muestra el modal con el show del prototipe de bootstrap consultar si esta disponible en la consola tipeando bootstrap
         modal.show();
+    }
+
+    function agregarFavorito(receta){
+        console.log(receta)
+        const favoritos = JSON.parse(localStorage.getItem('favoritos'))??[];
+        localStorage.setItem('favoritos', JSON.stringify([...favoritos,receta]));
     }
 
     function limpiarHTML(selector){
