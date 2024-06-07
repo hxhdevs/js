@@ -2,6 +2,8 @@
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
 
+const registroPorPagina = 40;
+
 window.onload = () => {
     formulario.addEventListener('submit', validarFormulario);
 };
@@ -43,15 +45,45 @@ function mostrarAlerta(mensaje) {
 
 function buscarImagenes(termino){
     const key = '44234018-a398908bb2e9097b09ca251a1';
-    const url = `https://pixabay.com/api/?key=${key}&q=${termino}`;
+    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=20`;
     console.log(url);
     fetch(url)
         .then(respuesta => respuesta.json())
         .then(resultado =>{
+            totalPaginas = calcularPaginas(resultado.totalHits);
             mostrarImagenes(resultado.hits)
         })
 }
 
+function calcularPaginas(total){
+    return parseInt(Math.ceil(total/registroPorPagina));
+}
+
 function mostrarImagenes(imagenes){
-    console.log(imagenes)
+    console.log(imagenes);
+
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild)
+    }
+
+    //Iterar sobre el arreglo de imagenes y construir el html
+    imagenes.forEach( imagen => {
+
+        const { likes, views, previewURL, largeImageURL } = imagen;
+        resultado.innerHTML += `
+            <div class="w-1/2 md:w-1/3 lg:w-1/4 mb-4 p-3">
+                <div class="bg-white ">
+                    <img class="w-full" src=${previewURL} alt={tags} />
+                    <div class="p-4">
+                        <p class="card-text">${likes} Me Gusta</p>
+                        <p class="card-text">${views} Vistas </p>
+        
+                        <a href=${largeImageURL} 
+                        rel="noopener noreferrer" 
+                        target="_blank" class="bg-blue-800 w-full p-1 block mt-5 rounded text-center font-bold uppercase hover:bg-blue-500 text-white">Ver Imagen</a>
+                    </div>
+                </div>
+            </div>
+            `;
+    });
 }
