@@ -6,6 +6,7 @@ const paginacionDiv = document.querySelector('#paginacion');
 const registroPorPagina = 40;
 let totalPaginas;
 let iterador;
+let paginaActual = 1;
 
 window.onload = () => {
     formulario.addEventListener('submit', validarFormulario);
@@ -46,9 +47,11 @@ function mostrarAlerta(mensaje) {
     }
 }
 
-function buscarImagenes(termino){
+function buscarImagenes(){
+    const termino = document.querySelector('#termino').value;
+
     const key = '44234018-a398908bb2e9097b09ca251a1';
-    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=${registroPorPagina}`;
+    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=${registroPorPagina}&page=${paginaActual}`;
     console.log(url);
     fetch(url)
         .then(respuesta => respuesta.json())
@@ -60,7 +63,7 @@ function buscarImagenes(termino){
 //Generador que va a registrar la cantidad de elementos de acuerdo a las paginas
 function *crearPaginador(total){//un generador se define con un asterisco
     console.log(total);
-    for (let i = 0;i<=total;i++){
+    for (let i = 1;i<=total;i++){
         yield i;
     }
 }
@@ -79,7 +82,7 @@ function mostrarImagenes(imagenes){
     //Iterar sobre el arreglo de imagenes y construir el html
     imagenes.forEach( imagen => {
 
-        const { likes, views, previewURL, largeImageURL } = imagen;
+        const { previewURL,likes,views,largeImageURL } = imagen;
         resultado.innerHTML += `
             <div class="w-1/2 md:w-1/3 lg:w-1/4 mb-4 p-3">
                 <div class="bg-white ">
@@ -117,8 +120,13 @@ function imprimirPaginador(){
         boton.href='#';
         boton.dataset.pagina = value;
         boton.textContent = value;
-        boton.classList.add('siguiente','bg-yellow-400','px-4','py-1','mr-2','font-bold','mb-1','uppercase','rounded');
+        boton.classList.add('siguiente','bg-yellow-400','px-4','py-1','mr-2','font-bold','mb-4','rounded');
 
+        boton.onclick = () =>{
+            paginaActual = value;
+
+            console.log(paginaActual);
+        }
         paginacionDiv.appendChild(boton);
     }
 }
