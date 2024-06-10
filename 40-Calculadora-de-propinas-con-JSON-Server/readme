@@ -1,0 +1,5 @@
+instalar node y checar si se instalo con
+node -v
+
+instalar JSON Server
+npm install -g json-server
