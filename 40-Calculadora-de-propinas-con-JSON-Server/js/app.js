@@ -40,9 +40,19 @@ function guardarCliente(){
  
     //Mostrar las secciones despues de ocultar el modal
     mostrarSecciones();
+    obtenerPlatillos()
 }
 
 function mostrarSecciones(){
     const seccionesOcultas = document.querySelectorAll('.d-none');
     seccionesOcultas.forEach(seccion => seccion.classList.remove('d-none'))
+}
+
+function obtenerPlatillos(){
+    const url ='http://127.0.0.1:5500/40-Calculadora-de-propinas-con-JSON-Server/db.json';
+    
+    fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(resultado => console.log(resultado))
+        .catch(error => console.log(error))
 }
