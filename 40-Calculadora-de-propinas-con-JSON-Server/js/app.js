@@ -111,5 +111,14 @@ function mostrarPlatillos({platillos}){//pasamos el objecto como array obj
 }
 
 function agregarPlatillo(producto){
-    console.log('desde agregar platillo',producto)
+    //Extraemos el pedido actual
+    let {pedido} = cliente;
+    
+    //Revisar que la cantidad sea mayor a 0
+    if (producto.cantidad>0) {
+        cliente.pedido= [...pedido,producto];
+        } else {
+            console.log('no es mayor a 0')
+            }
+        console.log(cliente.pedido)
 }
