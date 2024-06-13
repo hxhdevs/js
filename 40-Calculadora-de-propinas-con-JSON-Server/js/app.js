@@ -116,9 +116,21 @@ function agregarPlatillo(producto){
     
     //Revisar que la cantidad sea mayor a 0
     if (producto.cantidad>0) {
-        cliente.pedido= [...pedido,producto];
-        } else {
-            console.log('no es mayor a 0')
-            }
-        console.log(cliente.pedido)
+        if(pedido.some(articulo=> articulo.id===producto.id)) {
+            const pedidoActualizado = pedido.map(articulo=>{
+                if (articulo.id === producto.id) {
+                    articulo.cantidad = producto.cantidad;
+                }
+                return articulo;
+            });
+            //se asigna el nuevo array a cliente.pedido
+            cliente.pedido= [...pedidoActualizado];
+        }else{
+            //El articulo no existe no agregamos
+            cliente.pedido= [...pedido,producto];
+        }
+    }else{
+        console.log('No es mayor a 0')
+    }
+    console.log(cliente.pedido);
 }
