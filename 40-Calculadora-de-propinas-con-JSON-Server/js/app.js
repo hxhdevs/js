@@ -133,35 +133,104 @@ function agregarPlatillo(producto){
         const resultado = pedido.filter(articulo => articulo.id !== producto.id);
         cliente.pedido = [...resultado];
     }
+    limpiarHTML();
     actualizarResumen();
 }
 
 function actualizarResumen(){
+
     const contenido = document.querySelector('#resumen .contenido');
     
     const resumen = document.createElement('div');
-    resumen.classList.add('col-md-6');
+    resumen.classList.add('col-md-6','card','py-5','px-3','shadow');
 
+    //Informacion de la mesa
     const mesa = document.createElement('P');
-    mesa.textContent = 'Mesa';
+    mesa.textContent = 'Mesa: ';
     mesa.classList.add('fw-bold');
 
     const mesaSpan = document.createElement('span');
     mesaSpan.textContent = cliente.mesa;
     mesaSpan.classList.add('fw-normal');
 
+    //Informacion de la hora
     const hora = document.createElement('P');
-    hora.textContent = 'Hora';
+    hora.textContent = 'Hora: ';
     hora.classList.add('fw-bold');
 
-    const horaSpan = document.createElement('P');
+    const horaSpan = document.createElement('span');
     horaSpan.textContent = cliente.hora;
-    horaSpan.classList.add('fw-bold');
+    horaSpan.classList.add('fw-normal');
     
-
+    //Agregar a los elementos padre
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
 
+    //Titulo de la seccion
+    const heading = document.createElement('h3');
+    heading.textContent = 'Platillos consumidos';
+    heading.classList.add('my-4','text-center');
+
+    //Iterar sobre el array de pedidos
+    const grupo = document.createElement('ul');
+    grupo.classList.add('list-group');
+
+    const {pedido} = cliente;
+    pedido.forEach(articulo => {
+        const { nombre, cantidad, precio, id} = articulo;
+
+        const lista = document.createElement('LI');
+        lista.classList.add('list-group-item');
+
+        const nombreEl = document.createElement('h4');
+        nombreEl.classList.add('my-4');
+        nombreEl.textContent = nombre;
+
+        //Cantidad del articulo
+        const cantidadEl = document.createElement('p');
+        cantidadEl.classList.add('fw-world');
+        cantidadEl.textContent = 'Cantidad: ';
+
+        const cantidadValor = document.createElement('span');
+        cantidadValor.classList.add('fw-normal');
+        cantidadValor.textContent = cantidad;
+
+        //Precio del articulo
+        const precioEl = document.createElement('p');
+        precioEl.classList.add('fw-world');
+        precioEl.textContent = 'Precio: ';
+
+        const precioValor = document.createElement('span');
+        precioValor.classList.add('fw-normal');
+        precioValor.textContent = `$${precio}`;
+
+        //Agregar valor a los contenedores
+        cantidadEl.appendChild(cantidadValor);
+        precioEl.appendChild(precioValor);
+        
+        //Agregar elemento al Li
+        lista.appendChild(nombreEl);
+        lista.appendChild(cantidadEl);
+        lista.appendChild(precioEl);
+
+        //Agregar lista al grupo inicial
+        grupo.appendChild(lista);
+    });
+
+
+    //Agregar al contenido
     contenido.appendChild(mesa);
     contenido.appendChild(hora);
+    contenido.appendChild(heading);
+    contenido.appendChild(grupo);
+
+    contenido.appendChild(resumen);
+
+}
+
+function limpiarHTML(){
+    const contenido = document.querySelector('#resumen .contenido');
+    while (contenido.firstChild) {
+        contenido.removeChild(contenido.firstChild);
+    }
 }
