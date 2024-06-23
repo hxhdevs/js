@@ -17,5 +17,3 @@ export function mostrarAlerta(mensaje) {
         }, 3000);
     }
 }
-// Creamos elemento para mostrar alerta cuando no se cumpla la validacion y la exportamos para que sea consumida en donde se mande a llamar
-// 

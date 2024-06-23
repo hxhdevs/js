@@ -1,4 +1,5 @@
-import { mostrarAlerta } from './funciones.js';//importamos la funcion desde el archivo llamado recuerda que tiene que agregarse import
+import { nuevoCliente } from './API.js';
+import { mostrarAlerta } from './funciones.js';
 
 (function() {
     const formulario = document.querySelector('#formulario');
@@ -20,18 +21,18 @@ import { mostrarAlerta } from './funciones.js';//importamos la funcion desde el 
         }
 
         if( validar(cliente) ) {
-            mostrarAlerta('Todos los campos son obligatorios')
+            mostrarAlerta('Todos los campos son obligatorios');
             return;
         }
-        
-        console.log('Si se paso la validacion')
+        await nuevoCliente(cliente);
+        window.location.href = 'index.html';
     }
 
 
    
 
-    function validar(obj) {//Forma refactorizada que valida los campos
-        return !Object.values(obj).every(element => element !== '');
+    function validar(obj) {
+        return !Object.values(obj).every(element => element !== '') ;
     }
 
    
