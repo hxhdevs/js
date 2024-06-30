@@ -1,4 +1,3 @@
-
 // Namespaces es un design pattern de organización de código, ayuda a evitar colision con nombres en el scope global de javascript.
 
 // la idea del namespace es crear un objeto global alrededor de tu aplicación y agregar todas las funciones dentro en lugar de crear múltiples funciones y objetos que se puedan acceder de forma global.
