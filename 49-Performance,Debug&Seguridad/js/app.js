@@ -36,6 +36,8 @@ function consultarCriptomonedas() {// Consulta la API par aobtener un listado de
 }
 
 function selectCriptomonedas(criptomonedas) {// llena el select 
+   const inicio = performance.now();
+
     criptomonedas.forEach( cripto => {
         const { FullName, Name } = cripto.CoinInfo;
 
@@ -44,6 +46,10 @@ function selectCriptomonedas(criptomonedas) {// llena el select
         option.textContent = FullName;
         criptomonedasSelect.appendChild(option);// insertar el HTML
     });
+   
+    const fin = performance.now();
+   
+    console.log(fin-inicio);
 }
 
 function leerValor(e){
