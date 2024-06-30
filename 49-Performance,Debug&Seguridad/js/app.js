@@ -102,6 +102,8 @@ function mostrarCotizacionHTML(cotizacion){
 
     const {PRICE, HIGHDAY,LOWDAY,CHANGEPCT24HOUR,LASTUPDATE} = cotizacion;
 
+    debugger;//debugger muestra los valores obtenidos y resultados hasta ese putno de ejecucion seria algo parecido al die() de php
+
     const precio = document.createElement('P');
     precio.classList.add('precio');
     precio.innerHTML = `El precio es: <span>${PRICE}</span>`;
