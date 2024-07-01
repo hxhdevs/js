@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Jest",
   "main": "index.js",
-
+  "scripts": {
+    "test": "jest"
+  },
   "author": "Hector",
   "license": "ISC",
   "devDependencies": {
