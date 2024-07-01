@@ -3,7 +3,7 @@
 exports[`Testing al cliente Es Elih?  1`] = `
 {
   "balance": 500,
-  "nombre": "Elih",
+  "nombre": "Elih Freecs",
   "tipo": "Premium",
 }
 `;
