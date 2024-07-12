@@ -19,3 +19,6 @@ npm run dev
 
 ## Como habilitar el funcionamiento de modulos con express?
  agregando type en package.json
+## Instalamos pug el siguiente comando como produccion
+npm install pug
+creamos carpeta views con archivos .pug

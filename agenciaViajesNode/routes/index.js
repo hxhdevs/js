@@ -6,7 +6,7 @@ router.get('/',(req, res)=>{// req - lo que enviamos : res - lo que express nos 
     res.send('Inicio');
 })
 router.get('/nosotros',(req, res)=>{
-    res.send('Nosotros');
+    res.render('nosotros');
 })
 router.get('/contacto',(req, res)=>{
     res.send('Contacto');
