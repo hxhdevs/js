@@ -17,3 +17,5 @@ ver las diferencias de instalacion en package.json que hace referencia en cuanto
 
 npm run dev
 
+## Como habilitar el funcionamiento de modulos con express?
+ agregando type en package.json
