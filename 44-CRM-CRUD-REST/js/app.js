@@ -4,26 +4,31 @@ import { obtenerClientes, eliminarCliente } from './API.js';
     const listado = document.querySelector('#listado-clientes');
     listado.addEventListener('click', confirmarEliminar);
 
-
     document.addEventListener('DOMContentLoaded', mostrarClientes);
 
     async function mostrarClientes() {
         const clientes = await obtenerClientes();
-        
-        console.log(clientes)
-        clientes.forEach( cliente => {
+    
+        // Verificar si clientes es un array, si no lo es, intentar convertirlo
+        const clientesArray = Array.isArray(clientes) ? clientes : (clientes ? [clientes] : []);
+    
+        console.log("Clientes convertidos a array:", clientesArray);
+    
+        clientesArray.forEach(cliente => {
             const { nombre, email, telefono, empresa, id } = cliente;
             const row = document.createElement('tr');
-
+            console.log(cliente)
+            console.log(row)
+    
             row.innerHTML += `
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <p class="text-sm leading-5 font-medium text-gray-700 text-lg  font-bold"> ${nombre} </p>
+                    <p class="text-sm leading-5 font-medium text-gray-700 text-lg font-bold"> ${nombre} </p>
                     <p class="text-sm leading-10 text-gray-700"> ${email} </p>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                     <p class="text-gray-700">${telefono}</p>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200  leading-5 text-gray-700">    
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 leading-5 text-gray-700">    
                     <p class="text-gray-600">${empresa}</p>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
@@ -31,10 +36,11 @@ import { obtenerClientes, eliminarCliente } from './API.js';
                     <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900 eliminar">Eliminar</a>
                 </td>
             `;
-
+    
             listado.appendChild(row);
-        })
+        });
     }
+    
 
    async function confirmarEliminar(e) {
         if( e.target.classList.contains('eliminar') ) {

@@ -17,12 +17,23 @@ export const nuevoCliente = async cliente => {
 export const obtenerClientes = async () => {
     try {
         const resultado = await fetch(url);
-        const clientes = await resultado.json();
-        return clientes;
+        const respuesta = await resultado.json();
+        
+        // Verificar si la respuesta contiene la propiedad "clientes"
+        if (!respuesta.clientes || !Array.isArray(respuesta.clientes)) {
+            throw new Error('La respuesta no contiene una lista de clientes válida.');
+        }
+
+        const clientesArray = respuesta.clientes;
+
+        console.log("Clientes obtenidos:", clientesArray);
+        return clientesArray;
     } catch (error) {
         console.log(error);
+        throw new Error('Error al obtener los clientes.');
     }
 }
+
 
 export const obtenerCliente = async id => {
     try {
