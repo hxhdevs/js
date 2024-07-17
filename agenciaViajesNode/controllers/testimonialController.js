@@ -14,6 +14,17 @@ const guardarTestimonial =(req,res)=>{
         errores.push({mensaje:'El mensaje esta vacio'})
     }
     
+    if (errores.length>0) {
+        res.render('testimoniales',{
+            pagina:'Testimoniales',
+            errores,
+            nombre,
+            correo,
+            mensaje
+        })
+    } else{
+        //Almacenar en la base de datos
+    }
     console.log(req.body);
     console.log(errores);
 }
