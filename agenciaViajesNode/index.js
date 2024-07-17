@@ -27,6 +27,9 @@ app.use((req,res,next)=>{
     next();
 })
 
+//Agregar body
+app.use(express.urlencoded({extended:true})); 
+
 // Definir la carpeta publica 
 app.use(express.static('public'));
 
