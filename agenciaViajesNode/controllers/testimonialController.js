@@ -23,7 +23,8 @@ const guardarTestimonial = async(req,res)=>{
             errores,
             nombre,
             correo,
-            mensaje
+            mensaje,
+            testimoniales
         })
     } else{
         //Almacenar en la base de datos
