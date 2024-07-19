@@ -1,13 +1,8 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import router from './routes/index.js';
 import db from './config/db.js';
-dotenv.config()
-console.log(process.env.DATABASE);
-// const express = require('express');
 
 const app = express();
-
 
 //Conectar la base de datos
 db.authenticate()
