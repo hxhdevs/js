@@ -22,3 +22,5 @@ npm run dev
 ## Instalamos pug el siguiente comando como produccion
 npm install pug
 creamos carpeta views con archivos .pug
+##
+node i dotenv
